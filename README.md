@@ -1,50 +1,85 @@
-# GitHub Actions Windows RDP via Tailscale
+# GitHub Actions Windows RDP + MCSManager
 
-Repository ini menyediakan workflow GitHub Actions untuk membuat akses **Remote Desktop Protocol (RDP)** ke runner Windows secara aman menggunakan **Tailscale**.
+Repository ini menyediakan **dua workflow RDP Windows berbasis GitHub Actions**.
 
-Workflow ini cocok untuk:
-- Debugging aplikasi Windows
-- Pengujian GUI
-- Eksperimen environment Windows sementara
+Salah satu workflow **khusus untuk setup MCSManager + Java 21** sehingga **panel web bisa dibuka dari HP**.
 
 ---
 
-## Fitur
+## 🔹 Workflow 1 — RDP Basic
 
-- Windows runner (`windows-latest`)
-- RDP otomatis aktif
-- Pembuatan user administrator lokal
-- Password acak dengan keamanan tinggi
-- Akses privat menggunakan Tailscale
-- Koneksi dipertahankan hingga workflow dihentikan manual
+**Nama:** `RDP`
 
----
-
-## Cara Kerja
-
-1. Workflow dijalankan manual (`workflow_dispatch`)
-2. RDP diaktifkan dan firewall port `3389` dibuka
-3. User lokal `Skyro` dibuat dengan password acak
-4. Tailscale di-install dan dihubungkan ke network privat
-5. IP Tailscale ditampilkan
-6. Koneksi RDP diverifikasi
-7. Runner dijaga tetap aktif
+### Fungsi
+- Akses RDP Windows
+- Cocok untuk debugging manual
+- Tidak ada panel web
 
 ---
 
-## Persyaratan
+## 🔹 Workflow 2 — RDP + MCSManager Panel
 
-### Akun Tailscale
-Wajib memiliki akun Tailscale aktif.
+**Nama:** `RDP + MCSManager Panel`
 
-### GitHub Secret
-Tambahkan secret berikut di repository:
-
-- **Name:** `TAILSCALE_AUTH_KEY`
-- **Value:** Auth Key dari dashboard Tailscale
+### Fungsi
+- RDP Windows
+- Install Java 21
+- Download & menjalankan MCSManager
+- Web panel bisa diakses via HP
+- Akses aman via Tailscale
 
 ---
 
-## Informasi Login RDP
+## 🔐 Persyaratan
 
-Saat workflow berjalan, detail login akan muncul di log:
+Tambahkan GitHub Secret:
+
+| Name | Value |
+|-----|------|
+| `TAILSCALE_AUTH_KEY` | Auth Key dari Tailscale |
+
+---
+
+## 🖥️ Akses RDP
+
+- IP       : `Tailscale IP`
+- Username : `Skyro`
+- Password : lihat log workflow
+
+---
+
+## 🌐 Akses Web MCSManager (HP)
+
+Pastikan HP sudah login ke Tailscale.
+Panel akan muncul otomatis setelah workflow berjalan.
+
+---
+
+## ☕ Java
+
+- Java 21 (Temurin / setara Oracle)
+- Siap untuk Minecraft server modern
+
+---
+
+## ⚠️ Catatan Penting
+
+- GitHub Actions **bukan VPS**
+- Runtime terbatas
+- Semua data hilang setelah workflow berhenti
+- Gunakan hanya untuk testing / edukasi
+
+---
+
+## Rekomendasi
+
+| Kebutuhan | Workflow |
+|---------|---------|
+| RDP saja | Workflow 1 |
+| Panel MC + HP | Workflow 2 |
+
+---
+
+## Disclaimer
+
+Digunakan untuk edukasi & eksperimen teknis.
