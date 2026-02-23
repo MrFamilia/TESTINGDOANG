@@ -52,7 +52,7 @@ jobs:
           
           echo "RDP_CREDS=User: FokusID | Password: $password" >> $env:GITHUB_ENV
           
-          if (-not (Get-LocalUser -Name "Skyro")) {
+          if (-not (Get-LocalUser -Name "FokusID")) {
               Write-Error "User creation failed"
               exit 1
           }
@@ -102,7 +102,7 @@ jobs:
         run: |
           Write-Host "`n=== RDP ACCESS ==="
           Write-Host "Address: $env:TAILSCALE_IP"
-          Write-Host "Username: Skyro"
+          Write-Host "Username: FokusID"
           Write-Host "Password: $(echo $env:RDP_CREDS)"
           Write-Host "==================`n"
           
